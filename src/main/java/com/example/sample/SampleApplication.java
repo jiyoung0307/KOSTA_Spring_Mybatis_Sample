@@ -8,7 +8,7 @@ public class SampleApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(SampleApplication.class, args);
-        System.out.printf("여기가 메인이다");
+        System.out.printf("여기가 실행파일이다");
     }
 
 }
