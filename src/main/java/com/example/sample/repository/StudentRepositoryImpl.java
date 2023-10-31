@@ -31,17 +31,17 @@ public class StudentRepositoryImpl implements StudentRepository {
 
     @Override
     public Student update(int studentId, Student student) {
-        Student updateStudent = null;
+        Student updatedStudent = null;
         if(selectById(studentId) != null)
-            updateStudent = studentMap.put(seq, student);
+            updatedStudent = studentMap.put(seq, student);
         else
-            updateStudent = regist(student);
-        return updateStudent;
+            updatedStudent = regist(student);
+        return updatedStudent;
     }
 
     @Override
-    public Student delete(int studentId, Student student) {
-        Student deleteStudent = studentMap.put(seq, student);
+    public Student delete(int studentId) {
+        Student deleteStudent = studentMap.remove(studentId);
         return deleteStudent;
     }
 }

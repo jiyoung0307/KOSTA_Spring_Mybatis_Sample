@@ -8,6 +8,6 @@ public interface StudentRepository {
     Student selectById(int studentId);
     Student regist(Student student);
     Student update(int studentId, Student student);
-    Student delete(int studentId, Student student);
+    Student delete(int studentId);
 
 }
