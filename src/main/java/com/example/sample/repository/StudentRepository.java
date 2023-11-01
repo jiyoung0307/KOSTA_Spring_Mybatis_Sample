@@ -1,6 +1,7 @@
 package com.example.sample.repository;
 
 import com.example.sample.domain.Student;
+import com.example.sample.domain.StudentInquiryDTO;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -11,4 +12,6 @@ public interface StudentRepository {
     Student findById(int id);
     void updateStudent(Student student);
     int addStudent(Student student);
+
+    List<Student> findByInquiryDTO(StudentInquiryDTO studentInquiryDTO);
 }

@@ -2,7 +2,8 @@ package com.example.sample.controller;
 
 import com.example.sample.domain.Score;
 import com.example.sample.domain.Student;
-import com.example.sample.repository.ScoreRepository;
+import com.example.sample.domain.StudentInquiryDTO;
+import com.example.sample.service.ScoreService;
 import com.example.sample.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,13 +16,13 @@ import java.util.List;
 @RequestMapping("/students")
 public class StudentController {
     private final StudentService studentService;
-    private final ScoreRepository scoreRepository;
+    private final ScoreService scoreService;
 
     @Autowired
     public StudentController(StudentService studentService,
-                             ScoreRepository scoreRepository) {
+                             ScoreService scoreService) {
         this.studentService = studentService;
-        this.scoreRepository = scoreRepository;
+        this.scoreService = scoreService;
     }
 
     @GetMapping
@@ -41,7 +42,7 @@ public class StudentController {
     @GetMapping("/studentUpdate/{id}")
     public String updateScore(@PathVariable int id,  Model model){
         Student studentInfo = studentService.getStudentInfo(id);
-        Score score = scoreRepository.findById(id);  // 점수 없는 경우만 입력한다
+        Score score = scoreService.getStudentScore(id);  // 점수 없는 경우만 입력한다
         System.out.println("score null ? " + score);
         if(score == null) {
             model.addAttribute("student", studentInfo);
@@ -56,7 +57,7 @@ public class StudentController {
                               @ModelAttribute Score score){
         Student studentInfo = studentService.getStudentInfo(id);
         System.out.println(score.getId() + ":" + score.getSPoint());
-        scoreRepository.addScore(score);
+        scoreService.addStudentScore(score);
         studentService.updateStudent(id);
         return "redirect:/students";
     }
@@ -70,5 +71,13 @@ public class StudentController {
     public String addNewStudent(@ModelAttribute Student student){
         studentService.addNewStudent(student);
         return "redirect:/students";
+    }
+
+    @GetMapping("/imquiry")
+    public String getStudentsInquiry(@ModelAttribute StudentInquiryDTO studentInquiryDTO,
+                                     Model model) {
+        List<Student> students = studentService.getStudentInquiry(studentInquiryDTO);
+        model.addAttribute("students", students);
+        return "student/studentList";
     }
 }

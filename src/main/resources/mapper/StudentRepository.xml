@@ -20,4 +20,14 @@
         SET point = #{point}
         WHERE id =#{id}
     </update>
+
+
+    <select id="findByInquiryDTO" parameterType="StudentInquiryDTO"
+            resultType="Student">
+        SELECT *
+        FROM student
+        WHERE univ like #{univ}
+        AND name like #{name}
+        AND point >= #{point}
+    </select>
 </mapper>

@@ -11,7 +11,7 @@
     이름<input type="text" th:field="${student.name}" readonly><br>
     이전학점 <input type="number" th:field="${student.point}" readonly><br>
     번호<input type="text" name="id" th:value="${student.id}" hidden><br>
-    반영할 학점 <input type="number" name="sPoint">
+    반영할 학점 <input type="number" name="sPoint" step="0.1">
     <input type="submit" value="학점수정">
 </form>
 </body>
