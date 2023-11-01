@@ -1,8 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper
-        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        PUBLIC "-//mybasis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-
-<mapper>
-<!--    쿼리문-->
+<mapper namespace="com.example.sample.repository.StudentRepository">
+    <select id="findAll" resultType="Student">
+        SELECT *
+        FROM student
+    </select>
+    <select id="findById" resultType="Student">
+        SELECT *
+        FROM student where id=#{id}
+    </select>
+    <insert id="addStudent" parameterType="Student" keyProperty="id" useGeneratedKeys="true">
+        INSERT into student (name,univ,birth,email,point)
+        VALUES (#{name},#{univ},#{birth},#{email},#{point})
+    </insert>
+    <update id="updateStudent" parameterType="Student">
+        UPDATE student
+        SET point = #{point}
+        WHERE id =#{id}
+    </update>
 </mapper>

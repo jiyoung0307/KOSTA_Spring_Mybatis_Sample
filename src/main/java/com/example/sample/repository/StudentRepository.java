@@ -1,13 +1,14 @@
 package com.example.sample.repository;
 
-import com.example.sample.model.Student;
+import com.example.sample.domain.Student;
+import org.apache.ibatis.annotations.Mapper;
+
 import java.util.List;
 
+@Mapper
 public interface StudentRepository {
-    List<Student> selectAll();
-    Student selectById(int studentId);
-    Student regist(Student student);
-    Student update(int studentId, Student student);
-    Student delete(int studentId);
-
+    List<Student> findAll();
+    Student findById(int id);
+    void updateStudent(Student student);
+    int addStudent(Student student);
 }
